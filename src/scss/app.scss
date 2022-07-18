@@ -3,6 +3,10 @@
 
 @import 'components/all';
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   background-color: $background;
 }
