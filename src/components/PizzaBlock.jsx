@@ -15,7 +15,7 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
           {types.map((type) => (
             <li
               onClick={() => setActiveType(type)}
-              className={activeType === type ? 'active' : ''}
+              className={activeType === type || types.length < 2 ? 'active' : ''}
               key={type}>
               {typeNames[type]}
             </li>

@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Sort = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(0);
+  const sortValues = ['Popularity', 'Price', 'Name'];
+  const sortName = sortValues[selectedValue];
+
+  const SelectedValueToggler = (index) => {
+    setSelectedValue(index);
+    setIsVisible(false);
+  };
   return (
     <div className="sort">
       <div className="sort__label">
@@ -16,15 +25,27 @@ const Sort = () => {
           />
         </svg>
         <b>Sort by:</b>
-        <span>popularity</span>
+        <span
+          onClick={() => {
+            setIsVisible((isVisible) => !isVisible);
+          }}>
+          {sortName}
+        </span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">Popularity</li>
-          <li>Price</li>
-          <li>Name</li>
-        </ul>
-      </div>
+      {isVisible && (
+        <div className="sort__popup">
+          <ul>
+            {sortValues.map((value, index) => (
+              <li
+                className={selectedValue === index ? 'active' : ''}
+                onClick={() => SelectedValueToggler(index)}
+                key={index}>
+                {value}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
