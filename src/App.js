@@ -3,24 +3,25 @@ import Categories from './components/Categories';
 import Header from './components/Header';
 import PizzaBlock from './components/PizzaBlock';
 import Sort from './components/Sort';
+import pizzas from './assets/pizzas.json';
 
 import './scss/app.scss';
 
 function App() {
   return (
-    <div class="wrapper">
+    <div className="wrapper">
       <Header />
-      <div class="content">
-        <div class="container">
-          <div class="content__top">
+      <div className="content">
+        <div className="container">
+          <div className="content__top">
             <Categories />
             <Sort />
           </div>
-          <h2 class="content__title">All pizza</h2>
-          <div class="content__items">
-            <PizzaBlock title="Mexican" price={15.99} />
-            <PizzaBlock title="Hawaiian" price={12.99} />
-            <PizzaBlock title="Pepperoni" price={8.99} />
+          <h2 className="content__title">All pizza</h2>
+          <div className="content__items">
+            {pizzas.map((pizza) => (
+              <PizzaBlock {...pizza} key={pizza.id} />
+            ))}
           </div>
         </div>
       </div>
