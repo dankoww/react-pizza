@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 
-const Sort = () => {
+const Sort = ({ value, onChangeSort }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(0);
-  const sortValues = ['Popularity', 'Price', 'Name'];
-  const sortName = sortValues[selectedValue];
+  const sortValues = [
+    { name: 'Popularity', sortProperty: 'rating' },
+    { name: 'Price', sortProperty: 'price' },
+    { name: 'Name', sortProperty: 'title' }
+  ];
 
   const SelectedValueToggler = (index) => {
-    setSelectedValue(index);
+    onChangeSort(index);
     setIsVisible(false);
   };
   return (
@@ -29,18 +31,18 @@ const Sort = () => {
           onClick={() => {
             setIsVisible((isVisible) => !isVisible);
           }}>
-          {sortName}
+          {value.name}
         </span>
       </div>
       {isVisible && (
         <div className="sort__popup">
           <ul>
-            {sortValues.map((value, index) => (
+            {sortValues.map((obj, index) => (
               <li
-                className={selectedValue === index ? 'active' : ''}
-                onClick={() => SelectedValueToggler(index)}
+                className={value.sortProperty === obj.sortProperty ? 'active' : ''}
+                onClick={() => SelectedValueToggler(obj)}
                 key={index}>
-                {value}
+                {obj.name}
               </li>
             ))}
           </ul>
